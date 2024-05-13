@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VAPW_SIMON_semestral", "VAPW_SIMON_semestral\VAPW_SIMON_semestral.csproj", "{DAFE3226-2381-4BAD-9A9A-0F00C5F812F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simon_mycka", "Simon_mycka\Simon_mycka.csproj", "{88BA6331-2AAD-433A-9318-6F28AC135CD6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DAFE3226-2381-4BAD-9A9A-0F00C5F812F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAFE3226-2381-4BAD-9A9A-0F00C5F812F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAFE3226-2381-4BAD-9A9A-0F00C5F812F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAFE3226-2381-4BAD-9A9A-0F00C5F812F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88BA6331-2AAD-433A-9318-6F28AC135CD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88BA6331-2AAD-433A-9318-6F28AC135CD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88BA6331-2AAD-433A-9318-6F28AC135CD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88BA6331-2AAD-433A-9318-6F28AC135CD6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4BD22298-B484-4412-9A1F-EBE3F69045F1}
+	EndGlobalSection
+EndGlobal

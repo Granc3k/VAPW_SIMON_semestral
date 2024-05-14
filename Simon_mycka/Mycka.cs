@@ -10,11 +10,11 @@ namespace Simon_mycka
         public Semafor VstupSemafor { get; private set; }
         public Semafor VystupSemafor { get; private set; }
 
-        public bool picture1 { get; private set; } = false;
+        public bool picture1 { get; private set; }
 
-        public bool picture2 { get; private set; } = false;
+        public bool picture2 { get; private set; }
 
-        public bool picture3 {  get; private set; } = false;
+        public bool picture3 {  get; private set; }
 
         private int WorkingCycleMs = 0;
         private Data _MyckaStav { get; set; }
@@ -42,6 +42,10 @@ namespace Simon_mycka
             mycka.VystupSemafor = Semafor.Red;
             mycka.VstupVrata = false;
             mycka.VystupVrata = false;
+            mycka.picture1 = false;
+            mycka.picture2 = false;
+            mycka.picture3 = false;
+
             mycka.MyckaStav = UpdateData(mycka);
 
             while (mycka.Running)
@@ -55,10 +59,10 @@ namespace Simon_mycka
                         {
                             mycka.VstupSemafor = Semafor.Green;
                             mycka.VstupVrata = true;
-                            mycka.MyckaStav = UpdateData(mycka);
-                            state = 1;
                             mycka.picture1 = true;
                             mycka.picture3 = false;
+                            mycka.MyckaStav = UpdateData(mycka);
+                            state = 1;
                         }
                         break;
                     case 1:
@@ -66,11 +70,11 @@ namespace Simon_mycka
                         {
                             mycka.VstupSemafor = Semafor.Red;
                             mycka.VstupVrata = false;
+                            mycka.picture1 = false;
+                            mycka.picture2 = true;
                             mycka.MyckaStav = UpdateData(mycka);
                             mycka.Washing = true;
                             state = 2;
-                            mycka.picture1 = false;
-                            mycka.picture2 = true;
                         }
                         break;
                     case 2:
@@ -78,11 +82,11 @@ namespace Simon_mycka
                         {
                             mycka.VystupSemafor = Semafor.Green;
                             mycka.VystupVrata = true;
+                            mycka.picture1 = false;
+                            mycka.picture2 = true;
                             mycka.MyckaStav = UpdateData(mycka);
                             mycka.Finished = true;
                             state = 3;
-                            mycka.picture1 = false;
-                            mycka.picture2 = true;
                         }
                         break;
                     case 3:
@@ -92,14 +96,14 @@ namespace Simon_mycka
                             mycka.VystupSemafor = Semafor.Red;
                             mycka.VstupVrata = false;
                             mycka.VystupVrata = false;
+                            mycka.picture2 = false;
+                            mycka.picture3 = true;
                             mycka.MyckaStav = UpdateData(mycka);
                             mycka.Open = false;
                             mycka.FinishedWashing = false;
                             mycka.Finished = false;
                             mycka.CarInside = false;
                             state = 0;
-                            mycka.picture2 = false;
-                            mycka.picture3 = true;
                         }
                         break;
                 }

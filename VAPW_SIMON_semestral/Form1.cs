@@ -30,24 +30,20 @@ namespace VAPW_SIMON_semestral
         private void CheckOnTimer(object? sender, EventArgs e)
         {
             if (handleEvents)
-            {
-                if (this.IsHandleCreated)
-                {
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        vstupVrataLabel.Text = mycka.VstupVrata ? "Otevřeno" : "Zavřeno";
-                        vystupVrataLabel.Text = mycka.VystupVrata ? "Otevřeno" : "Zavřeno";
-                        VstupBranaPanel.Visible = mycka.VstupVrata ? false : true;
-                        VystupBranaPanel.Visible = mycka.VystupVrata ? false : true;
-                        pictureBox1.Visible = mycka.picture1;
-                        pictureBox2.Visible = mycka.picture2;
-                        pictureBox3.Visible = mycka.picture3;
-                        Semafor1.BackColor = Color.FromName(mycka.VstupSemafor.ToString());
-                        Semafor2.BackColor = Color.FromName(mycka.VystupSemafor.ToString());
-                    });
-                }
-                timer.Start();
+            {    
+                vstupVrataLabel.Text = mycka.VstupVrata ? "Otevřeno" : "Zavřeno";
+                vystupVrataLabel.Text = mycka.VystupVrata ? "Otevřeno" : "Zavřeno";
+                VstupBranaPanel.Visible = mycka.VstupVrata ? false : true;
+                VystupBranaPanel.Visible = mycka.VystupVrata ? false : true;
+                pictureBox1.Visible = mycka.picture1;
+                pictureBox2.Visible = mycka.picture2;
+                pictureBox3.Visible = mycka.picture3;
+                Semafor1.BackColor = Color.FromName(mycka.VstupSemafor.ToString());
+                Semafor2.BackColor = Color.FromName(mycka.VystupSemafor.ToString());
+                    
             }
+            timer.Start();
+            
         }
 
         private void Mycka_OnCarWashStateChanged(object sender, Data WashState)

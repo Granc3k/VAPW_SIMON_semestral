@@ -10,6 +10,12 @@ namespace Simon_mycka
         public Semafor VstupSemafor { get; private set; }
         public Semafor VystupSemafor { get; private set; }
 
+        public bool picture1 { get; private set; } = false;
+
+        public bool picture2 { get; private set; } = false;
+
+        public bool picture3 {  get; private set; } = false;
+
         private int WorkingCycleMs = 0;
         private Data _MyckaStav { get; set; }
         public Data MyckaStav { get { return _MyckaStav; } private set { var changed = value != _MyckaStav; _MyckaStav = value; if (changed) OnCarWashStateChanged?.Invoke(this, _MyckaStav); } }
@@ -21,7 +27,7 @@ namespace Simon_mycka
         private bool Running { get; set; } = false;
         private bool Washing { get; set; } = false;
         private bool Open { get; set; } = false;
-        private bool FinishedWashing { get; set; } = false;
+        private bool FinishedWashing {get; set; } = false;
         private bool Finished { get; set; } = false;
         private bool CarInside { get; set; } = false;
 
@@ -51,6 +57,8 @@ namespace Simon_mycka
                             mycka.VstupVrata = true;
                             mycka.MyckaStav = UpdateData(mycka);
                             state = 1;
+                            mycka.picture1 = true;
+                            mycka.picture3 = false;
                         }
                         break;
                     case 1:
@@ -61,6 +69,8 @@ namespace Simon_mycka
                             mycka.MyckaStav = UpdateData(mycka);
                             mycka.Washing = true;
                             state = 2;
+                            mycka.picture1 = false;
+                            mycka.picture2 = true;
                         }
                         break;
                     case 2:
@@ -71,6 +81,8 @@ namespace Simon_mycka
                             mycka.MyckaStav = UpdateData(mycka);
                             mycka.Finished = true;
                             state = 3;
+                            mycka.picture1 = false;
+                            mycka.picture2 = true;
                         }
                         break;
                     case 3:
@@ -86,6 +98,8 @@ namespace Simon_mycka
                             mycka.Finished = false;
                             mycka.CarInside = false;
                             state = 0;
+                            mycka.picture2 = false;
+                            mycka.picture3 = true;
                         }
                         break;
                 }
@@ -113,18 +127,18 @@ namespace Simon_mycka
 
         private static Data UpdateData(Mycka self)
         {
-            var data = new Data(self.VstupVrata, self.VystupVrata, self.VstupSemafor, self.VystupSemafor);
+            var data = new Data(self.VstupVrata, self.VystupVrata, self.VstupSemafor, self.VystupSemafor, self.picture1, self.picture2, self.picture3);
             return data;
         }
 
-        public static int GetWashDuration(WashStyle style)
+        public static int GetWashDuration(Styl style)
         {
             return style switch
             {
-                WashStyle.FULL => 10,
-                WashStyle.Basic => 5,
-                WashStyle.Quick => 2,
-                _ => throw new ArgumentException("Invalid wash style"),
+                Styl.Plne => 10,
+                Styl.Zakladni => 5,
+                Styl.Rychle => 2,
+                _ => throw new ArgumentException("Nevalidní styl mytí"),
             };
         }
 
@@ -146,7 +160,7 @@ namespace Simon_mycka
         {
             if (!Finished)
             {
-                throw new InvalidOperationException("Car is not washed");
+                throw new InvalidOperationException("Auto není umyté");
             }
             Finished = false;
         }
@@ -155,16 +169,16 @@ namespace Simon_mycka
         {
             if (!Open)
             {
-                throw new InvalidOperationException("Door is not open");
+                throw new InvalidOperationException("Vrata nejsou otevřena");
             }
             if (CarInside == true)
             {
-                throw new InvalidOperationException("Car is already inside");
+                throw new InvalidOperationException("Auto je už uvnitř");
             }
             CarInside = true;
         }
 
-        public void VyberStylu(WashStyle style)
+        public void VyberStylu(Styl style)
         {
             int time = 1000 * GetWashDuration(style);
             WorkingCycleMs = time;
